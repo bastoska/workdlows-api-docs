@@ -43,8 +43,99 @@ paths:
                   $ref: '#/components/schemas/WorkloadBase'
         '400':
           description: Bad request
-
-  
+  /workloads{id}:
+    delete:
+      tags:
+        - workload
+      summary: Delete a specific workload
+      description: Deletes a specific workload by its ID. Deleting a workload means that the related cloud resources will be deleted.
+      parameters:
+        - name: id
+          in: path
+          description: Workload ID
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Batch workload deleted successfully
+        '401':
+          description: Unauthorized
+        '404':
+          description: Not Found
+        '408':
+          description: Request Timeout
+        '500':
+          description: Internal Server Error
+          
+  /workloads/listByLabelKey:
+    get:
+      tags:
+        - workload
+      summary: List Workloads by google cloud label keys
+      description: Multiple keys can be provided with comma separated strings. Use environment, tag2, deparment for testing.
+      operationId: listByLabelKey
+      parameters:
+        - name: key
+          in: query
+          description: Keys to filter by
+          required: false
+          explode: true
+          schema:
+            type: array
+            items:
+              type: string
+      responses:
+        '200':
+          description: Workload list by keys
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/WorkloadBase'
+        '400':
+          description: Invalid tag value
+        '408':
+          description: Request Timeout
+        '500':
+          description: Internal Server Error
+  /workloads/listByStatus:
+    get:
+      tags:
+        - workload
+      summary: List Workloads by status
+      description: Multiple keys can be provided with comma separated strings. Use environment, tag2, deparment for testing.
+      operationId: listByStatus
+      parameters:
+        - name: status
+          in: query
+          description: Status values that need to be considered for filter
+          required: false
+          explode: true
+          schema:
+            type: string
+            default: created
+            enum:
+              - created
+              - pending
+              - active
+              - canceled
+      responses:
+        '200':
+          description: Workload list by keys
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/WorkloadBase'
+        '400':
+          description: Invalid tag value
+        '408':
+          description: Request Timeout
+        '500':
+          description: Internal Server Error
   /workloads/batch/{id}:
     get:
       tags:
@@ -111,29 +202,29 @@ paths:
         '500':
           description: Internal Server Error
 
-    delete:
-      tags:
-        - workload
-      summary: Delete a specific batch workload
-      description: Deletes a specific batch workload by its ID.
-      parameters:
-        - name: id
-          in: path
-          description: ID of the batch workload
-          required: true
-          schema:
-            type: integer
-      responses:
-        '204':
-          description: Batch workload deleted successfully
-        '401':
-          description: Unauthorized
-        '404':
-          description: Not Found
-        '408':
-          description: Request Timeout
-        '500':
-          description: Internal Server Error
+    # delete:
+    #   tags:
+    #     - workload
+    #   summary: Delete a specific batch workload
+    #   description: Deletes a specific batch workload by its ID.
+    #   parameters:
+    #     - name: id
+    #       in: path
+    #       description: ID of the batch workload
+    #       required: true
+    #       schema:
+    #         type: integer
+    #   responses:
+    #     '204':
+    #       description: Batch workload deleted successfully
+    #     '401':
+    #       description: Unauthorized
+    #     '404':
+    #       description: Not Found
+    #     '408':
+    #       description: Request Timeout
+    #     '500':
+    #       description: Internal Server Error
 
 
   /workloads/stream/{id}:
@@ -202,29 +293,29 @@ paths:
         '500':
           description: Internal Server Error
 
-    delete:
-      tags:
-        - workload
-      summary: Delete a specific stream workload
-      description: Deletes a specific stream workload by its ID.
-      parameters:
-        - name: id
-          in: path
-          description: ID of the stream workload
-          required: true
-          schema:
-            type: integer
-      responses:
-        '204':
-          description: Stream workload deleted successfully
-        '401':
-          description: Unauthorized
-        '404':
-          description: Not Found
-        '408':
-          description: Request Timeout
-        '500':
-          description: Internal Server Error
+    # delete:
+    #   tags:
+    #     - workload
+    #   summary: Delete a specific stream workload
+    #   description: Deletes a specific stream workload by its ID.
+    #   parameters:
+    #     - name: id
+    #       in: path
+    #       description: ID of the stream workload
+    #       required: true
+    #       schema:
+    #         type: integer
+    #   responses:
+    #     '204':
+    #       description: Stream workload deleted successfully
+    #     '401':
+    #       description: Unauthorized
+    #     '404':
+    #       description: Not Found
+    #     '408':
+    #       description: Request Timeout
+    #     '500':
+    #       description: Internal Server Error
 
 
   /workloads/async/{id}:
@@ -293,29 +384,29 @@ paths:
         '500':
           description: Internal Server Error
 
-    delete:
-      tags:
-        - workload
-      summary: Delete a specific async workload
-      description: Deletes a specific async workload by its ID.
-      parameters:
-        - name: id
-          in: path
-          description: ID of the async workload
-          required: true
-          schema:
-            type: integer
-      responses:
-        '204':
-          description: Async workload deleted successfully
-        '401':
-          description: Unauthorized
-        '404':
-          description: Not Found
-        '408':
-          description: Request Timeout
-        '500':
-          description: Internal Server Error
+    # delete:
+    #   tags:
+    #     - workload
+    #   summary: Delete a specific async workload
+    #   description: Deletes a specific async workload by its ID.
+    #   parameters:
+    #     - name: id
+    #       in: path
+    #       description: ID of the async workload
+    #       required: true
+    #       schema:
+    #         type: integer
+    #   responses:
+    #     '204':
+    #       description: Async workload deleted successfully
+    #     '401':
+    #       description: Unauthorized
+    #     '404':
+    #       description: Not Found
+    #     '408':
+    #       description: Request Timeout
+    #     '500':
+    #       description: Internal Server Error
 
 
   /workloads/batch:
