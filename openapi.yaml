@@ -507,6 +507,7 @@ components:
             - batch
             - streaming
             - async
+          example: batch
         name:
           type: string
           example: 'Data Processing Workload'
@@ -527,12 +528,14 @@ components:
           example: '2024-07-23T12:00:00Z'
         data_source_type:
           type: string
+          example: database
           enum:
             - file
             - database
             - message
         data_source_location:
           type: string
+          example: aws
           enum:
             - on-premise
             - gcp
@@ -541,6 +544,7 @@ components:
             - oci
         data_destination_type:
           type: string
+          example: gcs
           enum:
             - bigquery
             - gcs
@@ -548,7 +552,7 @@ components:
             - topic
         processing_type:
           type: string
-          example: 'active'
+          example: 'cpu'
           enum:
             - cpu
             - gpu
