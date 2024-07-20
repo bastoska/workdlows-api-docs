@@ -546,6 +546,12 @@ components:
             - gcs
             - bigtable
             - topic
+        processing_type:
+          type: string
+          example: 'active'
+          enum:
+            - cpu
+            - gpu
         gcp_labels:
           type: object
           additionalProperties:
@@ -586,6 +592,12 @@ components:
             - gcs
             - bigtable
             - topic
+        processing_type:
+          type: string
+          example: 'active'
+          enum:
+            - cpu
+            - gpu
     BatchWorkload:
       allOf:
         - $ref: '#/components/schemas/WorkloadBase'
@@ -616,6 +628,7 @@ components:
             gcp_labels:
               env: development  
               department: marketing
+            processing_type: cpu
             specification:
               update_frequency: "daily"
               reties: 5
@@ -644,6 +657,7 @@ components:
             data_source_type: 'database'
             data_source_location: "aws"
             data_destination_type: "bigquery"
+            processing_type: cpu
             specification:
               update_frequency: "daily"
               reties: 5
@@ -679,6 +693,7 @@ components:
             data_source_type: 'message'
             data_source_location: "gcp"
             data_destination_type: "bigquery"
+            processing_type: cpu
             gcp_labels:
               env: development  
               department: data-platform
@@ -713,6 +728,7 @@ components:
             data_source_type: 'message'
             data_source_location: "gcp"
             data_destination_type: "bigquery"
+            processing_type: cpu
             specification:
               oneOf:
                 - aggregation_window_seconds: 5
@@ -742,6 +758,7 @@ components:
             updated_at: '2024-07-23T12:00:00Z'
             data_source: 'gs://uploaded-files-bucket'
             data_destination: 'gs://processed-files-bucket'
+            processing_type: cpu
             gcp_labels:
               env: development  
               department: marketing
@@ -767,5 +784,6 @@ components:
             name: 'file-processing'
             data_source: 'gs://uploaded-files-bucket'
             data_destination: 'gs://processed-files-bucket'
+            processing_type: cpu
             specification:
               trigger_event: 'file_upload'
