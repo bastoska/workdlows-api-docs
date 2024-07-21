@@ -437,7 +437,7 @@ paths:
           description: Internal Server Error
 
 
-  /workloads/streaming:
+  /workloads/stream:
     post:
       tags:
         - workload
