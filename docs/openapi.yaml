@@ -8,7 +8,7 @@ info:
     - [API prototype Repository](https://github.com/bastoska/plataforma-dados-api)
   version: 1.0.0
 servers:
-  - url: https://api.yourdomain.com/api/v1
+  - url: https://api.telconet.com/api/v1
     description: Production server
   - url: http://localhost:8080/api/v1
     description: Development server
